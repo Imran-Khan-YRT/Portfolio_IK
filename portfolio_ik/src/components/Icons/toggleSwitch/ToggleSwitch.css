@@ -1,0 +1,76 @@
+:root {
+  --toggleswitch-width: 40px;
+  --toggleswitch-height: 24px;
+  /* ratio:0.7 */
+  --circle-height: calc(var(--toggleswitch-height) * 0.7);
+  --circle-width: calc(var(--toggleswitch-height) * 0.7);
+
+  /* twitch a bit if requires */
+  --circle-left-pos: calc(var(--toggleswitch-width) * 0.1);
+  --circle-distance-covered: calc(
+    calc(var(--toggleswitch-width) * 0.8) - var(--circle-width)
+  );
+  /* (1-ratio)/2 */
+  --circle-bottom-pos: calc(var(--toggleswitch-height) * 0.15);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: var(--toggleswitch-width);
+  height: var(--toggleswitch-height);
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #aaa;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: var(--circle-height);
+  width: var(--circle-width);
+  left: var(--circle-left-pos);
+  bottom: var(--circle-bottom-pos);
+  background-color: #fff;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #fff;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px blue;
+}
+
+input:checked + .slider:before {
+  background-color: #000;
+  -webkit-transform: translateX(var(--circle-distance-covered));
+  -ms-transform: translateX(var(--circle-distance-covered));
+  transform: translateX(var(--circle-distance-covered));
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
